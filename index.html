@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="桦甸租房信息平台，提供桦甸市真实、高效的房屋租赁服务。涵盖市区公寓、老旧小区、学区房、整租合租等多种房源类型，实时更新租金价格与房东联系方式。">
+    <meta name="keywords" content="桦甸租房信息, 吉林桦甸租房, 桦甸房屋出租, 桦甸小区房价, 桦甸短租">
+    <title>桦甸租房信息 - 桦甸本地真实房屋出租与租赁服务平台</title>
+    <style>
+        :root {
+            --primary-color: #2c7be5;
+            --primary-hover: #1a68d1;
+            --secondary-color: #f6f9fc;
+            --text-main: #2d3748;
+            --text-light: #718096;
+            --border-color: #e2e8f0;
+            --bg-body: #f8fafc;
+            --white: #ffffff;
+            --danger: #e53e3e;
+            --success: #38a169;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .gap-2 { gap: 8px; }
+        .gap-4 { gap: 16px; }
+        .gap-8 { gap: 32px; }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .header-actions .btn {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c7be5 0%, #3182ce 100%);
+            color: var(--white);
+            padding: 48px 0;
+            margin-bottom: 32px;
+        }
+
+        .hero-content h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        /* Search Box */
+        .search-container {
+            background: var(--white);
+            padding: 16px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            max-width: 900px;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 42px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--white);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content Grid */
+        main {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        /* Filter Tabs */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .filter-tab {
+            padding: 6px 16px;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--text-light);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .filter-tab.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .filter-tab:hover:not(.active) {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* House Card */
+        .house-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .house-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .house-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .house-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e2e8f0;
+            position: relative;
+        }
+
+        .house-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 8px;
+            background-color: rgba(0,0,0,0.7);
+            color: var(--white);
+            font-size: 12px;
+            border-radius: 4px;
+        }
+
+        .badge.hot {
+            background-color: #e53e3e;
+        }
+
+        .house-info {
+            padding: 16px;
+        }
+
+        .house-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .house-loc {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .house-features {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .house-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .price-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .price-text span {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .publish-time {
+            font-size: 12px;
+            color: #a0aec0;
+        }
+
+        /* Sidebar */
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sidebar-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .area-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .area-list li:hover {
+            color: var(--primary-color);
+        }
+
+        .area-list li:last-child {
+            border-bottom: none;
+        }
+
+        .area-list span {
+            color: var(--text-light);
+        }
+
+        .guide-list li {
+            margin-bottom: 12px;
+        }
+
+        .guide-list a {
+            font-size: 14px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-list a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Info Section */
+        .info-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .info-item h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .info-item p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-answer {
+            font-size: 14px;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a202c;
+            color: #a0aec0;
+            padding: 48px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .footer-brand h2 {
+            color: var(--white);
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid #2d3748;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            nav ul {
+                gap: 16px;
+                font-size: 14px;
+            }
+
+            .hero-content h1 {
+                font-size: 24px;
+            }
+
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .form-group {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>桦甸房产网</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">租房</a></li>
+                    <li><a href="#">二手房</a></li>
+                    <li><a href="#">小区</a></li>
+                    <li><a href="#">最新发布</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn btn-outline" style="color: var(--white); border-color: var(--white);">发布房源</a>
+                <a href="#" class="btn" style="margin-left: 8px;">登录</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>桦甸租房信息平台</h1>
+                <p>专注桦甸本地房屋租赁服务，海量真实房源，助您找到心仪的家</p>
+                
+                <div class="search-container">
+                    <div class="form-group">
+                        <label>区域/小区</label>
+                        <input type="text" placeholder="例如：红石街道、站前小区">
+                    </div>
+                    <div class="form-group">
+                        <label>户型</label>
+                        <select>
+                            <option value="">不限</option>
+                            <option value="1">一室</option>
+                            <option value="2">两室</option>
+                            <option value="3">三室</option>
+                            <option value="4+">四室及以上</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>租金范围</label>
+                        <select>
+                            <option value="">不限</option>
+                            <option value="500">500元以下</option>
+                            <option value="1000">1000-2000元</option>
+                            <option value="2000">2000-4000元</option>
+                            <option value="4000">4000元以上</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex: 0 0 auto;">
+                        <label>&nbsp;</label>
+                        <button class="btn" style="width: 100%;">搜索房源</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- Main Content: House List -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">最新出租房源</h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active">最新发布</button>
+                    <button class="filter-tab">价格从低到高</button>
+                    <button class="filter-tab">价格从高到低</button>
+                    <button class="filter-tab">地铁/交通</button>
+                </div>
+            </div>
+
+            <div class="house-grid">
+                <!-- House Card 1 -->
+                <article class="house-card">
+                    <div class="house-image">
+                        <span class="badge hot">急租</span>
+                        <img src="https://picsum.photos/seed/house1/400/300" alt="桦甸租房">
+                    </div>
+                    <div class="house-info">
+                        <h3 class="house-title">站前广场附近精装两居室，家电齐全拎包入住</h3>
+                        <div class="house-loc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            站前街道 · 老政府家属楼
+                        </div>
+                        <div class="house-features">
+                            <span class="feature-item">2室1厅</span>
+                            <span class="feature-item">85㎡</span>
+                            <span class="feature-item">南北通透</span>
+                        </div>
+                        <div class="house-price">
+                            <div class="price-text">1600<span>元/月</span></div>
+                            <span class="publish-time">2小时前</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- House Card 2 -->
+                <article class="house-card">
+                    <div class="house-image">
+                        <img src="https://picsum.photos/seed/house2/400/300" alt="桦甸租房">
+                    </div>
+                    <div class="house-info">
+                        <h3 class="house-title">市中心一居室，近幼儿园学校，生活便利</h3>
+                        <div class="house-loc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            新世纪广场 · 翡翠城
+                        </div>
+                        <div class="house-features">
+                            <span class="feature-item">1室1厅</span>
+                            <span class="feature-item">55㎡</span>
+                            <span class="feature-item">采光好</span>
+                        </div>
+                        <div class="house-price">
+                            <div class="price-text">1200<span>元/月</span></div>
+                            <span class="publish-time">昨天</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- House Card 3 -->
+                <article class="house-card">
+                    <div class="house-image">
+                        <span class="badge">新房源</span>
+                        <img src="https://picsum.photos/seed/house3/400/300" alt="桦甸租房">
+                    </div>
+                    <div class="house-info">
+                        <h3 class="house-title">南山花园小区高层三居室，视野开阔安静</h3>
+                        <div class="house-loc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            南山街道 · 南山花园
+                        </div>
+                        <div class="house-features">
+                            <span class="feature-item">3室2厅</span>
+                            <span class="feature-item">120㎡</span>
+                            <span class="feature-item">小区环境好</span>
+                        </div>
+                        <div class="house-price">
+                            <div class="price-text">2200<span>元/月</span></div>
+                            <span class="publish-time">2天前</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- House Card 4 -->
+                <article class="house-card">
+                    <div class="house-image">
+                        <img src="https://picsum.photos/seed/house4/400/300" alt="桦甸租房">
+                    </div>
+                    <div class="house-info">
+                        <h3 class="house-title">靠近松花江畔，环境优美，适合养老居住</h3>
+                        <div class="house-loc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            城东街道 · 江畔嘉园
+                        </div>
+                        <div class="house-features">
+                            <span class="feature-item">2室1厅</span>
+                            <span class="feature-item">90㎡</span>
+                            <span class="feature-item">江景</span>
+                        </div>
+                        <div class="house-price">
+                            <div class="price-text">1800<span>元/月</span></div>
+                            <span class="publish-time">3天前</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- House Card 5 -->
+                <article class="house-card">
+                    <div class="house-image">
+                        <img src="https://picsum.photos/seed/house5/400/300" alt="桦甸租房">
+                    </div>
+                    <div class="house-info">
+                        <h3 class="house-title">市中心单身公寓，拎包入住，随时看房</h3>
+                        <div class="house-loc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            站前街道 · 鼎盛国际
+                        </div>
+                        <div class="house-features">
+                            <span class="feature-item">1室1厅</span>
+                            <span class="feature-item">40㎡</span>
+                            <span class="feature-item">精装修</span>
+                        </div>
+                        <div class="house-price">
+                            <div class="price-text">900<span>元/月</span></div>
+                            <span class="publish-time">5天前</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- House Card 6 -->
+                <article class="house-card">
+                    <div class="house-image">
+                        <span class="badge">整租</span>
+                        <img src="https://picsum.photos/seed/house6/400/300" alt="桦甸租房">
+                    </div>
+                    <div class="house-info">
+                        <h3 class="house-title">老城区三楼独单，格局方正，停车方便</h3>
+                        <div class="house-loc">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            北山街道 · 民主街
+                        </div>
+                        <div class="house-features">
+                            <span class="feature-item">2室1厅</span>
+                            <span class="feature-item">75㎡</span>
+                            <span class="feature-item">有车位</span>
+                        </div>
+                        <div class="house-price">
+                            <div class="price-text">1400<span>元/月</span></div>
+                            <span class="publish-time">1周前</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="flex justify-center" style="margin-top: 40px;">
+                <button class="btn btn-outline" style="color: var(--text-main); border-color: var(--border-color);">加载更多</button>
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside>
+            <!-- Area Guide -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门区域</h3>
+                <ul class="area-list">
+                    <li><a href="#">站前街道 <span>128套</span></a></li>
+                    <li><a href="#">红石街道 <span>85套</span></a></li>
+                    <li><a href="#">北山街道 <span>92套</span></a></li>
+                    <li><a href="#">城东街道 <span>64套</span></a></li>
+                    <li><a href="#">胜利街道 <span>45套</span></a></li>
+                    <li><a href="#">开发区 <span>36套</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Rental Guide -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">租房指南</h3>
+                <ul class="guide-list">
+                    <li><a href="#">如何在桦甸租房避坑？</a></li>
+                    <li><a href="#">租房合同注意事项</a></li>
+                    <li><a href="#">检查房屋设施清单</a></li>
+                    <li><a href="#">水电费收费标准</a></li>
+                    <li><a href="#">如何辨别假房源</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="sidebar-card" style="background-color: #ebf8ff; border-color: #bee3f8;">
+                <h3 class="sidebar-title" style="color: #2c5282; border-color: #bee3f8;">找不到合适的房？</h3>
+                <p style="font-size: 13px; color: #4a5568; margin-bottom: 16px;">拨打客服热线，我们免费为您推荐优质房源。</p>
+                <button class="btn" style="width: 100%; background-color: #2c5282;">联系客服</button>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Info Section -->
+    <section class="container">
+        <div class="info-section">
+            <div class="section-header">
+                <h2 class="section-title">桦甸租房攻略</h2>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>📍 桦甸租房热门区域</h3>
+                    <p>站前街道作为桦甸的商业中心，交通便利，周边配套设施完善，是租房的首选区域。红石街道环境优美，适合居住。北山街道靠近公园，生活安静。</p>
+                </div>
+                <div class="info-item">
+                    <h3>💰 租金行情参考</h3>
+                    <p>目前桦甸市一居室月租金在800-1500元之间，两居室在1200-2500元之间，三居室在1800-3500元之间。具体价格取决于装修程度、楼层和小区环境。</p>
+                </div>
+                <div class="info-item">
+                    <h3>⚠️ 租房安全提示</h3>
+                    <ul class="checklist">
+                        <li>核实房东身份及房产证原件</li>
+                        <li>通过正规平台签约，明确租金支付方式</li>
+                        <li>检查水、电、气表读数并拍照留存</li>
+                        <li>仔细检查房屋设施，避免入住后产生纠纷</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="container" style="margin-bottom: 48px;">
+        <div class="info-section" style="padding: 24px;">
+            <h2 class="section-title" style="margin-bottom: 24px;">常见问题</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">在桦甸租房一般需要哪些证件？</div>
+                <div class="faq-answer">通常需要身份证、工作证明或学生证。如果是公司集体宿舍，可能只需要公司开具的证明。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">押金一般是多少？什么时候退还？</div>
+                <div class="faq-answer">一般押一付三或押一付六。合同期满且房屋设施无损坏、水电费结清的情况下，房东应在3-7个工作日内退还押金。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">中介费怎么收？</div>
+                <div class="faq-answer">正规中介通常收取半个月到一个月的租金作为中介费，具体金额可与中介协商。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">可以只租一个月吗？</div>
+                <div class="faq-answer">部分房东接受短租，但通常价格会比长租略高，且对租客的要求可能更严格。</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>桦甸房产网</h2>
+                    <p>致力于为桦甸市民提供最真实、最便捷的房屋租赁服务。连接房东与租客，让租房更简单。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">平台介绍</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">联系方式</a></li>
+                        <li><a href="#">广告服务</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助中心</h4>
+                    <ul>
+                        <li><a href="#">发布房源</a></li>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">服务条款</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系方式</h4>
+                    <ul>
+                        <li>电话：0432-XXXXXXX</li>
+                        <li>邮箱：support@huadianfang.com</li>
+                        <li>地址：吉林省桦甸市XXX路XXX号</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 桦甸房产网 版权所有. 本站所有房源信息由用户发布，仅供参考.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <script>
+        // 简单的交互逻辑：标签切换和FAQ折叠
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab 切换
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                });
+            });
+
+            // FAQ 折叠
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // 关闭其他
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) otherItem.classList.remove('active');
+                    });
+                    // 切换当前
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+  </html>
