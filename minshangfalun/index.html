@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="民商法论文 - 提供最新的民商法学术论文资源、法律案例分析、学术研究动态及论文写作指南，助力法学专业学生与研究者。">
+    <meta name="keywords" content="民商法论文,法学论文,民法论文,商法论文,法律学术研究">
+    <title>民商法论文 - 法学学术资源与研究平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #159895;
+            --accent-color: #f4a261;
+            --text-dark: #2c3e50;
+            --text-light: #5f6c7b;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --border-color: #e9ecef;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 布局容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 顶部导航 */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 5px 15px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 5px;
+            font-size: 0.9rem;
+            width: 200px;
+        }
+
+        /* 首屏 Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tag:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 主要内容区 Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* 论文列表 */
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .more-link {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .paper-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border-color);
+        }
+
+        .paper-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .paper-meta {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .paper-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .paper-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .paper-title a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .paper-summary {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .paper-actions {
+            display: flex;
+            gap: 15px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: var(--white);
+            border: 1px solid var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            background: #0e7a85;
+            border-color: #0e7a85;
+        }
+
+        /* 侧边栏 */
+        .sidebar-section {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hot-list li {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .hot-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hot-num {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-right: 12px;
+            min-width: 20px;
+        }
+
+        .hot-link {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .hot-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .category-list li {
+            margin-bottom: 8px;
+        }
+
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .category-list a:hover {
+            background-color: var(--bg-light);
+            color: var(--secondary-color);
+        }
+
+        .category-count {
+            background: var(--border-color);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* 写作指南区域 */
+        .guide-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .guide-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            transition: box-shadow 0.3s;
+        }
+
+        .guide-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .guide-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(21, 152, 149, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .guide-card h3 {
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .guide-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* 页脚 */
+        footer {
+            background: #1a1a1a;
+            color: #b0b0b0;
+            padding: 60px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .section-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                法学云<span>智库</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#" class="active">首页</a>
+                <a href="#">民商法专题</a>
+                <a href="#">刑法研究</a>
+                <a href="#">论文下载</a>
+                <a href="#">写作指导</a>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="搜索论文标题或作者...">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- 首屏区域 -->
+    <section class="hero">
+        <div class="container">
+            <h1>民商法论文资源中心</h1>
+            <p>汇聚民商法领域前沿学术成果，提供从选题策划到论文发表的全方位支持，助力法学研究者提升学术产出质量。</p>
+            <div class="hero-tags">
+                <span class="tag">民法典解读</span>
+                <span class="tag">公司法改革</span>
+                <span class="tag">合同法实务</span>
+                <span class="tag">知识产权</span>
+                <span class="tag">破产法</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="main-grid">
+            <!-- 左侧：论文列表 -->
+            <section class="content-area">
+                <div class="section-title">
+                    <h2>最新收录论文</h2>
+                    <a href="#" class="more-link">查看全部 &rarr;</a>
+                </div>
+
+                <article class="paper-card">
+                    <div class="paper-meta">
+                        <span>作者：张明楷</span>
+                        <span>来源：法学研究 2023</span>
+                        <span>浏览：12,450</span>
+                    </div>
+                    <h3 class="paper-title"><a href="#">论民法典时代的侵权责任认定规则重构</a></h3>
+                    <p class="paper-summary">本文深入探讨了在《民法典》实施背景下，侵权责任编如何与既有法律体系衔接，特别是在网络侵权、高空抛物等新型侵权形态下的责任认定逻辑与适用边界...</p>
+                    <div class="paper-actions">
+                        <button class="btn btn-outline" onclick="showToast('已添加到阅读列表')">加入阅读</button>
+                        <button class="btn btn-primary" onclick="showToast('正在下载全文...')">下载PDF</button>
+                        <button class="btn btn-outline" onclick="showToast('已收藏')">收藏</button>
+                    </div>
+                </article>
+
+                <article class="paper-card">
+                    <div class="paper-meta">
+                        <span>作者：王利明</span>
+                        <span>来源：中国法学 2023</span>
+                        <span>浏览：8,920</span>
+                    </div>
+                    <h3 class="paper-title"><a href="#">论公司资本制度的现代化变革</a></h3>
+                    <p class="paper-summary">随着商事实践的复杂化，传统的公司资本维持原则面临挑战。文章分析了认缴制改革后的法律风险，提出了兼顾投资自由与债权人保护的法律完善建议...</p>
+                    <div class="paper-actions">
+                        <button class="btn btn-outline" onclick="showToast('已添加到阅读列表')">加入阅读</button>
+                        <button class="btn btn-primary" onclick="showToast('正在下载全文...')">下载PDF</button>
+                        <button class="btn btn-outline" onclick="showToast('已收藏')">收藏</button>
+                    </div>
+                </article>
+
+                <article class="paper-card">
+                    <div class="paper-meta">
+                        <span>作者：赵旭东</span>
+                        <span>来源：中外法学 2022</span>
+                        <span>浏览：6,300</span>
+                    </div>
+                    <h3 class="paper-title"><a href="#">论商事信托的破产隔离功能及其限制</a></h3>
+                    <p class="paper-summary">商事信托作为一种重要的投融资工具，其破产隔离功能的发挥直接关系到交易安全。本文通过比较法视角，探讨了我国信托法在实现破产隔离时面临的制度障碍...</p>
+                    <div class="paper-actions">
+                        <button class="btn btn-outline" onclick="showToast('已添加到阅读列表')">加入阅读</button>
+                        <button class="btn btn-primary" onclick="showToast('正在下载全文...')">下载PDF</button>
+                        <button class="btn btn-outline" onclick="showToast('已收藏')">收藏</button>
+                    </div>
+                </article>
+
+                <article class="paper-card">
+                    <div class="paper-meta">
+                        <span>作者：梁慧星</span>
+                        <span>来源：法商研究 2023</span>
+                        <span>浏览：15,100</span>
+                    </div>
+                    <h3 class="paper-title"><a href="#">合同法中的情势变更原则适用研究</a></h3>
+                    <p class="paper-summary">情势变更原则是平衡合同严守与公平原则的重要制度。文章结合司法实践案例，分析了该原则在物价波动、汇率变化等情形下的适用标准与举证责任分配...</p>
+                    <div class="paper-actions">
+                        <button class="btn btn-outline" onclick="showToast('已添加到阅读列表')">加入阅读</button>
+                        <button class="btn btn-primary" onclick="showToast('正在下载全文...')">下载PDF</button>
+                        <button class="btn btn-outline" onclick="showToast('已收藏')">收藏</button>
+                    </div>
+                </article>
+            </section>
+
+            <!-- 右侧：侧边栏 -->
+            <aside class="sidebar">
+                <!-- 热门排行 -->
+                <div class="sidebar-section">
+                    <div class="section-title">
+                        <h3>热门榜单</h3>
+                    </div>
+                    <ul class="hot-list">
+                        <li>
+                            <span class="hot-num">1</span>
+                            <a href="#" class="hot-link">论数字时代的个人信息保护</a>
+                        </li>
+                        <li>
+                            <span class="hot-num">2</span>
+                            <a href="#" class="hot-link">论公司决议撤销之诉的时效问题</a>
+                        </li>
+                        <li>
+                            <span class="hot-num">3</span>
+                            <a href="#" class="hot-link">论票据无因性的相对性</a>
+                        </li>
+                        <li>
+                            <span class="hot-num">4</span>
+                            <a href="#" class="hot-link">论破产程序中债权人的共益债务认定</a>
+                        </li>
+                        <li>
+                            <span class="hot-num">5</span>
+                            <a href="#" class="hot-link">论民法典婚姻家庭编的变更与完善</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 分类浏览 -->
+                <div class="sidebar-section">
+                    <div class="section-title">
+                        <h3>分类浏览</h3>
+                    </div>
+                    <ul class="category-list">
+                        <li><a href="#"><span>民法总则与分则</span> <span class="category-count">342</span></a></li>
+                        <li><a href="#"><span>商法基础理论</span> <span class="category-count">218</span></a></li>
+                        <li><a href="#"><span>公司法</span> <span class="category-count">156</span></a></li>
+                        <li><a href="#"><span>破产法</span> <span class="category-count">89</span></a></li>
+                        <li><a href="#"><span>票据法与证券法</span> <span class="category-count">67</span></a></li>
+                        <li><a href="#"><span>保险法</span> <span class="category-count">45</span></a></li>
+                        <li><a href="#"><span>知识产权</span> <span class="category-count">230</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- 论文写作工具 -->
+                <div class="sidebar-section">
+                    <div class="section-title">
+                        <h3>学术工具</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <button class="btn btn-outline" style="justify-content: center;">AI 论文润色</button>
+                        <button class="btn btn-outline" style="justify-content: center;">参考文献格式生成</button>
+                        <button class="btn btn-outline" style="justify-content: center;">查重报告解读</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- 写作指南板块 -->
+        <section class="guide-section">
+            <div class="section-title">
+                <h2>民商法论文写作指南</h2>
+            </div>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <div class="guide-icon">1</div>
+                    <h3>选题与破题</h3>
+                    <p>如何从司法实践热点中挖掘具有研究价值的选题？掌握“小切口、深挖掘”的选题技巧，避免宏大叙事。</p>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-icon">2</div>
+                    <h3>文献综述构建</h3>
+                    <p>如何高效检索CNKI、Westlaw等数据库？学会运用文献计量学方法梳理学术脉络，找准研究空白点。</p>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-icon">3</div>
+                    <h3>论证方法</h3>
+                    <p>案例分析、比较法研究、法教义学分析在民商法论文中的应用场景及写作规范。</p>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-icon">4</div>
+                    <h3>规范引用与格式</h3>
+                    <p>严格遵守《法学引注手册》，规范引用法条、司法解释及学术著作，提升论文专业度。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>法学云智库</h4>
+                    <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.8;">致力于为法学教育工作者、研究生及法律从业者提供高质量的学术资源与信息服务。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速导航</h4>
+                    <ul>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">投稿指南</a></li>
+                        <li><a href="#">版权声明</a></li>
+                        <li><a href="#">联系方式</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>热门专题</h4>
+                    <ul>
+                        <li><a href="#">民法典实施</a></li>
+                        <li><a href="#">数字经济法</a></li>
+                        <li><a href="#">公司治理</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">学术交流群</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 法学云智库 版权所有. 本站内容仅供学术交流参考，请勿用于商业用途。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 简单交互脚本 -->
+    <script>
+        function showToast(message) {
+            // 创建 toast 元素
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            toast.style.color = '#fff';
+            toast.style.padding = '10px 20px';
+            toast.style.borderRadius = '4px';
+            toast.style.zIndex = '2000';
+            toast.style.fontSize = '0.9rem';
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.3s';
+
+            document.body.appendChild(toast);
+
+            // 动画显示
+            requestAnimationFrame(() => {
+                toast.style.opacity = '1';
+            });
+
+            // 2秒后消失
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 2000);
+        }
+    </script>
+</body>
+                  </html>
