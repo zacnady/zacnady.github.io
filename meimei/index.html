@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自拍 - 真实生活记录与摄影分享社区</title>
+    <meta name="description" content="这是一个专注于生活记录与摄影艺术的在线社区，提供关于自拍技巧、构图美学及个人形象管理的实用内容。我们致力于分享真实的自我表达，倡导健康、积极的网络交流环境。">
+    <meta name="keywords" content="自拍,摄影,生活记录,构图技巧,个人形象管理,摄影分享">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --spacing-unit: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        nav a.active, nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .search-bar {
+            display: flex;
+            background: #f1f1f1;
+            border-radius: 20px;
+            padding: 4px 12px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 4px;
+            font-size: 0.9rem;
+            width: 150px;
+        }
+
+        .search-bar button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-button {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            display: inline-block;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit) 60px;
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .category-tag {
+            background-color: var(--card-bg);
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid #eee;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .category-tag:hover, .category-tag.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Grid Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: white;
+            padding: 40px 0;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-item svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            fill: var(--primary-color);
+        }
+
+        .feature-item h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tips Section */
+        .tips-section {
+            background-color: #fff3e0;
+            padding: 40px 0;
+            margin: 40px 0;
+        }
+
+        .tips-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .tips-header {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .tips-header h2 {
+            color: #e65100;
+            font-size: 2rem;
+        }
+
+        .tips-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .tip-card h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-card p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #95a5a6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 10px;
+            }
+
+            nav {
+                order: 3;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            nav ul {
+                gap: 12px;
+                justify-content: center;
+                font-size: 0.9rem;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a href="#" class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            <span>Selfie</span>Hub
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">首页</a></li>
+                <li><a href="#">热门精选</a></li>
+                <li><a href="#">技巧教程</a></li>
+                <li><a href="#">社区互动</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="搜索作品...">
+            <button type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>记录真实的自己</h1>
+        <p>探索摄影美学，分享生活点滴。在这里，我们专注于提升自我形象表达能力，提供专业的构图建议与拍摄技巧。</p>
+        <a href="#" class="cta-button">开始创作</a>
+    </div>
+</section>
+
+<main class="container">
+    <div class="categories">
+        <div class="category-tag active">全部</div>
+        <div class="category-tag">街拍风格</div>
+        <div class="category-tag">自然光人像</div>
+        <div class="category-tag">复古胶片</div>
+        <div class="category-tag">职场穿搭</div>
+        <div class="category-tag">旅行记录</div>
+        <div class="category-tag">创意特写</div>
+    </div>
+
+    <div class="content-grid">
+        <!-- Card 1 -->
+        <article class="card">
+            <div class="card-image">
+                <img src="https://picsum.photos/seed/selfie1/400/300" alt="午后阳光下的自然自拍">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">午后阳光下的自然自拍技巧</h3>
+                <p class="card-desc">利用侧逆光打造柔和的轮廓光，展现皮肤质感。本文详细解析如何寻找最佳拍摄时间，以及简单的后期修图思路。</p>
+                <div class="card-meta">
+                    <div class="user-info">
+                        <div class="avatar"></div>
+                        <span>摄影达人Lisa</span>
+                    </div>
+                    <span>2小时前</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+            <div class="card-image">
+                <img src="https://picsum.photos/seed/selfie2/400/300" alt="街头潮流穿搭分享">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">街头潮流穿搭与抓拍指南</h3>
+                <p class="card-desc">如何在不经意间拍出有故事感的街拍照片？掌握动态抓拍的快门速度，捕捉自信的瞬间。</p>
+                <div class="card-meta">
+                    <div class="user-info">
+                        <div class="avatar"></div>
+                        <span>时尚博主Momo</span>
+                    </div>
+                    <span>5小时前</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+            <div class="card-image">
+                <img src="https://picsum.photos/seed/selfie3/400/300" alt="居家温馨氛围">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">居家温馨氛围感营造</h3>
+                <p class="card-desc">不需要昂贵的设备，利用家中的窗边光线，通过简单的道具摆放，也能拍出电影感的居家自拍。</p>
+                <div class="card-meta">
+                    <div class="user-info">
+                        <div class="avatar"></div>
+                        <span>生活家Anna</span>
+                    </div>
+                    <span>1天前</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card">
+            <div class="card-image">
+                <img src="https://picsum.photos/seed/selfie4/400/300" alt="复古滤镜教学">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">复古胶片滤镜调色教程</h3>
+                <p class="card-desc">想要那种温暖的怀旧感？通过降低对比度、增加暖色调，让照片瞬间穿越回80年代。</p>
+                <div class="card-meta">
+                    <div class="user-info">
+                        <div class="avatar"></div>
+                        <span>色彩工坊</span>
+                    </div>
+                    <span>2天前</span>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <section class="tips-section">
+        <div class="tips-container">
+            <div class="tips-header">
+                <h2>拍摄与形象管理建议</h2>
+                <p>为了呈现更好的视觉效果，请注意以下几点</p>
+            </div>
+            <div class="tips-list">
+                <div class="tip-card">
+                    <h4>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        保持设备清洁
+                    </h4>
+                    <p>镜头和屏幕的清洁直接决定成像质量。定期擦拭传感器和镜片，避免污渍影响画面清晰度。</p>
+                </div>
+                <div class="tip-card">
+                    <h4>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        利用自然光
+                    </h4>
+                    <p>尽量选择靠近窗户的自然光环境，避免直射的强光造成面部阴影。侧光更能凸显立体感。</p>
+                </div>
+                <div class="tip-card">
+                    <h4>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
+                        构图技巧
+                    </h4>
+                    <p>尝试三分法构图，将主体放在画面三分之一处，让视线更自然。多尝试不同的拍摄角度。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-item">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                <h3>社区互助</h3>
+                <p>加入摄影爱好者圈子，互相点评，共同进步。</p>
+            </div>
+            <div class="feature-item">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                <h3>海量教程</h3>
+                <p>从入门到精通，海量高清视频与图文教程。</p>
+            </div>
+            <div class="feature-item">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <h3>真实分享</h3>
+                <p>支持原创，保护隐私，分享真实的生活记录。</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>关于我们</h4>
+            <ul>
+                <li><a href="#">平台介绍</a></li>
+                <li><a href="#">加入团队</a></li>
+                <li><a href="#">联系方式</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>帮助中心</h4>
+            <ul>
+                <li><a href="#">新手指南</a></li>
+                <li><a href="#">隐私政策</a></li>
+                <li><a href="#">使用条款</a></li>
+                <li><a href="#">常见问题</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>社区规范</h4>
+            <ul>
+                <li><a href="#">内容审核标准</a></li>
+                <li><a href="#">用户行为规范</a></li>
+                <li><a href="#">版权声明</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>关注我们</h4>
+            <ul>
+                <li><a href="#">微信公众号</a></li>
+                <li><a href="#">新浪微博</a></li>
+                <li><a href="#">抖音账号</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2023 SelfieHub. All rights reserved. 本站所有内容仅供交流学习，请遵守相关法律法规。</p>
+    </div>
+</footer>
+
+</body>
+</html>
